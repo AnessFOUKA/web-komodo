@@ -8,7 +8,9 @@ class Game extends ItemHandler{
         this.ctx=this.canvas.getContext("2d");
         this.canvas.width=winWidth;
         this.canvas.height=winHeight;
-        this.canvas.style.imageRendering=imageRendering;
+        if(imageRendering){
+            this.canvas.style.imageRendering=imageRendering;
+        }
         this.mainMemoryManager=new MemoryManager();
         this.mainInputManager=new InputManager(keys);
         this.graphicPipeline={};
