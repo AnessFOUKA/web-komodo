@@ -17,6 +17,7 @@ class AnimatedImage extends GameObject{
         let xTemp=this.x+this.mother.x;
         let yTemp=this.y+this.mother.y;
         let imageCoord=this.imageCoords[this.imageCoordsIndex];
+        console.log(imageCoord);
         if(this.cameras.length>0){
             for(let i of this.cameras){
                 i.pushCameraGraphicOrder(this.imgId,xTemp,yTemp,imageCoord.x,imageCoord.y,imageCoord.width,imageCoord.height,this.scaleX,this.scaleY,this.gameInstance);
@@ -25,16 +26,16 @@ class AnimatedImage extends GameObject{
             this.gameInstance.addGraphicOrder(this.imgId,xTemp,yTemp,imageCoord.x,imageCoord.y,imageCoord.width,imageCoord.height,this.scaleX,this.scaleY);
         }
         if(imageCoord.frameTimeIndex<imageCoord.frameTimeMax){
-            imageCoord.frameTimeIndex+=imageCoord.animationSpeed*this.gameInstance.dt;
+            imageCoord.frameTimeIndex+=this.animationSpeed*this.gameInstance.dt;
         }
 
         if(imageCoord.frameTimeIndex>=imageCoord.frameTimeMax){
-            imageCoord.imageCoordsIndex+=1;
+            this.imageCoordsIndex+=1;
             imageCoord.frameTimeIndex=0;
         }
         
         if(this.imageCoordsIndex>=this.imageCoords.length){
-            imageCoordsIndex=0;
+            this.imageCoordsIndex=0;
         }
         if(this.gameInstance.mainInputManager.checkPressed("ArrowLeft")){
             this.x-=300*this.gameInstance.dt;
