@@ -20,9 +20,9 @@ export class Collider{
         for(let side of ["up","down","left","right","collideTrue"]){
             sides[side]=false;
         }
-        if(detectInbound(this.x-50,this.y-50,this.width+50,this.width+50,collider.x-50,collider.y-50,collider.width+50,collider.height+50)){
+        if(detectInbound(this.x-50,this.y-50,this.width+50,this.height+50,collider.x-50,collider.y-50,collider.width+50,collider.height+50)){
             let xCollisionZoneLength=Math.min(this.x+this.width,collider.x+collider.width)-Math.max(this.x,collider.x);
-            let yCollisionZoneLength=Math.min(this.y+this.width,collider.y+collider.height)-Math.max(this.y,collider.y);
+            let yCollisionZoneLength=Math.min(this.y+this.height,collider.y+collider.height)-Math.max(this.y,collider.y);
             if(yCollisionZoneLength>xCollisionZoneLength){
                 if(this.x+this.width>=collider.x&&this.x+this.width<collider.x+(collider.width/2)){
                     sides.left=true;
@@ -31,7 +31,7 @@ export class Collider{
                     sides.right=true;
                 }
             }else{
-                if(this.y+this.width>=collider.y&&this.y+this.width<collider.y+(collider.height/2)){
+                if(this.y+this.height>=collider.y&&this.y+this.height<collider.y+(collider.height/2)){
                     sides.up=true;
                 }
                 if(this.y<=collider.y+collider.height&&this.y>collider.y+(collider.height/2)){

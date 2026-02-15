@@ -1,4 +1,5 @@
 import GameObject from "./GameObject";
+import AnimatedImage from "./AnimatedImage";
 class ItemHandler extends GameObject {
     constructor(x, y, idsList, scriptsIds){
         super(idsList,scriptsIds);
@@ -42,7 +43,7 @@ class ItemHandler extends GameObject {
     }
     getElementById(id){
         const gameObjectsList=[];
-        for(let i=0;i<elements.length;i++){
+        for(let i=0;i<this.elements.length;i++){
             const list=this.elements[i].idsList;
             if(list.includes(id)){
                 gameObjectsList.push(this.elements[i]);
@@ -53,13 +54,19 @@ class ItemHandler extends GameObject {
 
     getWidth(){
         let width=0;
-        for(let item of elements){
-            if(item instanceof ItemHandler){
-                width=item.getWidth();
-            }else if(item instanceof AnimatedImage){
-                const potentialGreaterCoordinate=item.x+item.width;
-                if(potentialGreaterCoordinate>width){
-                    width=potentialGreaterCoordinate;
+        let first=true;
+        for(let i of this.elements){
+            if(i instanceof ItemHandler){
+                let itemHandlerWidth=i.getWidth();
+                if(itemHandlerWidth>width || first){
+                    width=itemHandlerWidth;
+                    first=false;
+                }
+            }else if(i instanceof AnimatedImage){
+                const itemHighestPosition=i.x+(i.imageCoords[i.imageCoordsIndex].width*i.scaleX);
+                if(itemHighestPosition>width || first){
+                    width=itemHighestPosition;
+                    first=false;
                 }
             }
         }
@@ -68,13 +75,19 @@ class ItemHandler extends GameObject {
 
     getHeight(){
         let height=0;
-        for(let item of elements){
-            if(item instanceof ItemHandler){
-                height=item.getHeight();
-            }else if(item instanceof AnimatedImage){
-                const potentialGreaterCoordinate=item.y+item.height;
-                if(potentialGreaterCoordinate>height){
-                    height=potentialGreaterCoordinate;
+        let first=true;
+        for(let i of this.elements){
+            if(i instanceof ItemHandler){
+                let itemHandlerHeight=i.getHeight();
+                if(itemHandlerHeight>height || first){
+                    height=itemHandlerHeight;
+                    first=false;
+                }
+            }else if(i instanceof AnimatedImage){
+                const itemHighestPosition=i.y+(i.imageCoords[i.imageCoordsIndex].height*i.scaleY);
+                if(itemHighestPosition>height || first){
+                    height=itemHighestPosition;
+                    first=false;
                 }
             }
         }

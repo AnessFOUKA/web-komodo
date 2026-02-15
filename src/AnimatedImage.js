@@ -36,19 +36,6 @@ class AnimatedImage extends GameObject{
         if(this.imageCoordsIndex>=this.imageCoords.length){
             this.imageCoordsIndex=0;
         }
-        if(this.gameInstance.mainInputManager.checkPressed("ArrowLeft")){
-            this.x-=300*this.gameInstance.dt;
-        }
-        if(this.gameInstance.mainInputManager.checkPressed("ArrowRight")){
-            this.x+=300*this.gameInstance.dt;
-        }
-        if(this.gameInstance.mainInputManager.checkPressed("ArrowUp")){
-            this.y-=300*this.gameInstance.dt;
-        }
-        if(this.gameInstance.mainInputManager.checkPressed("ArrowDown")){
-            this.y+=300*this.gameInstance.dt;
-            console.log("aa")
-        }
     }
 };
 

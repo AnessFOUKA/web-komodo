@@ -5,19 +5,19 @@ class MemoryManager{
         this.pipeline=[];
     }
     addImg(imgId){
-        this.pipeline.push(async()=>{
+        this.pipeline.push(async ()=>{
             try{
-                const loadingImagePromise=await (new Promise((resolve,reject)=>{
-                    const image=new Image();
-                    image.src=imgId;
-                    image.onload(resolve(image));
-                    image.onerror(reject("image loading error"));
-                }))
-                this.imgMem[imgId]=loadingImagePromise;
+                const image = await new Promise((resolve,reject)=>{
+                    const img = new Image();
+                    img.onload = () => resolve(img);
+                    img.onerror = () => reject(new Error("image loading error"));
+                    img.src = imgId;
+                });
+                this.imgMem[imgId] = image;
             }catch(err){
-                throw new Error(err);
+                throw err;
             }
-        })
+        });
     }
 
     getImg(imgId){

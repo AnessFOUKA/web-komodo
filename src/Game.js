@@ -42,7 +42,7 @@ class Game extends ItemHandler{
     addGraphicOrder(imgId, x, y, imageX, imageY, imageWidth, imageHeight, scaleX, scaleY){
         const graphicOrder={imgId:imgId,x:x,y:y,imageX:imageX,imageY:imageY,imageWidth:imageWidth,imageHeight:imageHeight,scaleX:scaleX,scaleY:scaleY};
         if(this.graphicPipeline[imgId]){
-            this.graphicPipeline[imgId].push_back(graphicOrder);
+            this.graphicPipeline[imgId].push(graphicOrder);
         }else{
             this.graphicPipeline[imgId]=[graphicOrder];
         }
