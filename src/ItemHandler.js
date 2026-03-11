@@ -14,7 +14,7 @@ class ItemHandler extends GameObject {
             this.elements.push(this.addPipeline[0]);
             this.addPipeline.splice(0,1);
         }
-        this.remPipeline.sort((a,b)=>a-b);
+        this.remPipeline.sort((a,b)=>b-a);
         while(this.remPipeline.length>0){
             this.elements.splice(this.remPipeline[0],1);
             this.remPipeline.splice(0,1);

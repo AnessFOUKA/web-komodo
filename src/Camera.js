@@ -5,7 +5,7 @@ class Camera{
         this.cameraX=cameraX;
         this.cameraY=cameraY;
     }
-    pushCameraGraphicOrder(imgId, x, y, imageX, imageY, imageWidth, imageHeight, scaleX, scaleY,gameInstance){
+    pushCameraGraphicOrder(imgId, x, y, imageX, imageY, imageWidth, imageHeight, scaleX, scaleY,alpha,gameInstance){
         for(let renderer of this.renderers){
             let rendererX=renderer[0];
             let rendererY=renderer[1];
@@ -45,7 +45,7 @@ class Camera{
                     imageHeightTemp-=(overflow/scaleY);
                 }
 
-                gameInstance.addGraphicOrder(imgId,worldX,worldY,imageXTemp,imageYTemp,imageWidthTemp,imageHeightTemp,scaleX,scaleY);
+                gameInstance.addGraphicOrder(imgId,worldX,worldY,imageXTemp,imageYTemp,imageWidthTemp,imageHeightTemp,scaleX,scaleY,alpha);
             }
         }
     }

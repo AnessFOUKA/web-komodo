@@ -1,7 +1,7 @@
 import GameObject from "./GameObject";
 
 class AnimatedImage extends GameObject{
-    constructor(imgId,x,y,imageCoords,imageCoordsIndex,animationSpeed,scaleX,scaleY,idsList,scriptsIds){
+    constructor(imgId,x,y,imageCoords,imageCoordsIndex,animationSpeed,scaleX,scaleY,alpha,idsList,scriptsIds){
         super(idsList,scriptsIds);
         this.imgId=imgId;
         this.x=x;
@@ -11,6 +11,7 @@ class AnimatedImage extends GameObject{
         this.animationSpeed=animationSpeed;
         this.scaleX=scaleX;
         this.scaleY=scaleY;
+        this.alpha=alpha;
     }
     step(){
         super.step();
@@ -19,10 +20,10 @@ class AnimatedImage extends GameObject{
         let imageCoord=this.imageCoords[this.imageCoordsIndex];
         if(this.cameras.length>0){
             for(let i of this.cameras){
-                i.pushCameraGraphicOrder(this.imgId,xTemp,yTemp,imageCoord.x,imageCoord.y,imageCoord.width,imageCoord.height,this.scaleX,this.scaleY,this.gameInstance);
+                i.pushCameraGraphicOrder(this.imgId,xTemp,yTemp,imageCoord.x,imageCoord.y,imageCoord.width,imageCoord.height,this.scaleX,this.scaleY,this.alpha,this.gameInstance);
             }
         }else{
-            this.gameInstance.addGraphicOrder(this.imgId,xTemp,yTemp,imageCoord.x,imageCoord.y,imageCoord.width,imageCoord.height,this.scaleX,this.scaleY);
+            this.gameInstance.addGraphicOrder(this.imgId,xTemp,yTemp,imageCoord.x,imageCoord.y,imageCoord.width,imageCoord.height,this.scaleX,this.scaleY,this.alpha);
         }
         if(imageCoord.frameTimeIndex<imageCoord.frameTimeMax){
             imageCoord.frameTimeIndex+=this.animationSpeed*this.gameInstance.dt;

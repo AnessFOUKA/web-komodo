@@ -20,7 +20,7 @@ class Game extends ItemHandler{
 
 
     async gameLoop(){
-        await this.mainMemoryManager.readPipeline();
+        await this.mainMemoryManager.readPipeline(); 
         this.ctx.fillStyle="black";
         this.ctx.fillRect(0,0,this.canvas.width,this.canvas.height);
         super.step();
@@ -39,8 +39,8 @@ class Game extends ItemHandler{
             console.error("query must not be null");
         }
     }
-    addGraphicOrder(imgId, x, y, imageX, imageY, imageWidth, imageHeight, scaleX, scaleY){
-        const graphicOrder={imgId:imgId,x:x,y:y,imageX:imageX,imageY:imageY,imageWidth:imageWidth,imageHeight:imageHeight,scaleX:scaleX,scaleY:scaleY};
+    addGraphicOrder(imgId, x, y, imageX, imageY, imageWidth, imageHeight, scaleX, scaleY,alpha){
+        const graphicOrder={imgId:imgId,x:x,y:y,imageX:imageX,imageY:imageY,imageWidth:imageWidth,imageHeight:imageHeight,scaleX:scaleX,scaleY:scaleY,alpha:alpha};
         if(this.graphicPipeline[imgId]){
             this.graphicPipeline[imgId].push(graphicOrder);
         }else{
@@ -50,7 +50,9 @@ class Game extends ItemHandler{
     readGraphicPipeline(){
         for(let imgId in this.graphicPipeline){
             for(let order of this.graphicPipeline[imgId]){
+                this.ctx.globalAlpha=order.alpha;
                 this.ctx.drawImage(this.mainMemoryManager.getImg(order.imgId),order.imageX,order.imageY,order.imageWidth,order.imageHeight,order.x,order.y,order.imageWidth*order.scaleX,order.imageHeight*order.scaleY);
+                this.ctx.globalAlpha = 1;
             }
         }
         this.graphicPipeline={};
